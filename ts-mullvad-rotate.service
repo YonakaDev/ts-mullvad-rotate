@@ -1,0 +1,13 @@
+[Unit]
+Description=Rotate Tailscale Mullvad exit node (non-UK)
+After=tailscaled.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStartPre=/bin/sleep 15
+ExecStart=/usr/local/bin/ts-mullvad-rotate.sh
+# Run as root so tailscale set works without sudo prompts
+User=root
+StandardOutput=journal
+StandardError=journal
